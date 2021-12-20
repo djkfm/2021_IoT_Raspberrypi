@@ -1,0 +1,19 @@
+import cv2
+
+# xml 분류기 파일 로드 
+face_cascade = cv2.CascadeClassifier('./xml/face.xml')
+
+img = cv2.imread('avengers.jpg')
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+#이미지에서 얼굴 검출
+faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+
+#얼굴 위치에 대한 좌표정보 가져오기 
+for (x, y, w, h) in faces:
+    # 원본 이미지 얼굴 위치 표시
+    cv2.rectangle(img, (x,y), (x+w, y+h), (255, 0, 0), 2)
+
+cv2.imshow('img', img)
+cv2.waitKey(0)
+cv2.destroyAllwindows()
